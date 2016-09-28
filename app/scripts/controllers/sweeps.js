@@ -8,10 +8,8 @@
  * Controller of the sweeprClientApp
  */
 angular.module('sweeprClientApp')
-  .controller('AboutCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('SweepsCtrl', function ($scope) {
+    $scope.sweeps = {
+      'title' : 'applesauces'
+    };
   });

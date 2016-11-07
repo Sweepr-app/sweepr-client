@@ -1,10 +1,32 @@
 <div ng-controller="SweepsCtrl">
   <ul>
-    <li ng-repeat="sweep in sweeps">
-      <h1>{{sweep.title}}</h1>
-      <p>
-        {{sweep.description}}
-      </p>
-    </li>
+    <div ng-repeat="sweep in sweeps" class="ui link cards">
+      <div class="ui fluid raised card">
+        <div class="content">
+          <div class="right floated meta">Organizer: {{sweep.organizer}}</div>
+          <i class="heart outline like icon"></i> {{sweep.title}}
+        </div>
+        <div class="image">
+          <img>
+        </div>
+        <div class="content">
+          <span class="right floated">
+            <i class="heart outline like icon"></i>
+            {{sweep.organizer}}
+            {{sweep.date}}
+            {{sweep.location}}
+          </span>
+          <i class="comment icon"></i>
+          {{sweep.participants}} Participants
+        </div>
+        <div class="extra content">
+          <div class="ui large transparent left icon input">
+            <i class="heart outline icon"></i>
+            <input type="text" placeholder="Add Comment...">
+          </div>
+        </div>
+      </div>
+    </div>
   </ul>
+  
 </div>

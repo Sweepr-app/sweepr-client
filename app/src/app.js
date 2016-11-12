@@ -8,6 +8,10 @@
  *
  * Main module of the application.
  */
+ 
+
+
+
 angular
   .module('sweeprClientApp', [
     'ngAnimate',
@@ -24,9 +28,16 @@ angular
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'auth/auth.html',
+        templateUrl: 'landing/landing.html'
+      })
+      .state('login', {
+        url: '/login',
         controller: 'AuthCtrl',
-        controllerAs: 'auth'
+        templateUrl: 'auth/login.html'
+      })
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'auth/signup.html'
       })
       .state('sweeps', {
         url: '/sweeps',
@@ -50,7 +61,9 @@ angular
         return;
       }
 
-      if (toState.name !== 'home') {
+      if (toState.name !== 'home' && 
+          toState.name !== 'login' &&
+          toState.name !== 'signup') {
         console.log("Attempting to go to open state.")
         return;
       }

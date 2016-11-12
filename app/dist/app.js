@@ -27,29 +27,59 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
+    'LocalStorageModule',
     'sweeprClientApp.templates',
-    'ngTouch'
+    'ngTouch',
+    'ui.router'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
+  .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('home', {
+        url: '/',
         templateUrl: 'auth/auth.html',
         controller: 'AuthCtrl',
         controllerAs: 'auth'
       })
-      .when('/sweeps', {
+      .state('sweeps', {
+        url: '/sweeps',
         templateUrl: 'sweeps/sweeps.html',
         controller: 'SweepsCtrl',
         controllerAs: 'sweeps'
       })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+      
+      $urlRouterProvider.otherwise(function () {
+        return '/';
+      })
+  }])
+  .config(function (localStorageServiceProvider) {
+    localStorageServiceProvider
+      .setPrefix('sweeprApp');
+  })
+  .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
+
+    $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+      if (typeof toState === 'undefined') {
+        return;
+      }
+
+      if (toState.name !== 'home') {
+        console.log("Attempting to go to open state.")
+        return;
+      }
+
+
+    })
+
+  }])
 
 angular.module('sweeprClientApp')
   .controller('AuthCtrl', [function () {
     
+  }])
+angular.module('sweeprClientApp')
+  .factory('AuthService', [ 'localStorageService', function (localStorageService) {
+
+    return {};
   }])
 angular.module('sweeprClientApp')
   .controller('SweepsCtrl', [function () {

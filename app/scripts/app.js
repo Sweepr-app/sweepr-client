@@ -8,6 +8,10 @@
  *
  * Main module of the application.
  */
+ 
+
+
+
 angular
   .module('sweeprClientApp', [
     'ngAnimate',
@@ -28,6 +32,11 @@ angular
         templateUrl: 'views/sweeps.html',
         controller: 'SweepsCtrl',
         controllerAs: 'sweeps'
+      })
+      .when('/landing', {
+        templateUrl: 'views/landing.html',
+        controller: 'LandingCtrl',
+        controllerAs: 'landing'
       })
       .otherwise({
         redirectTo: '/'

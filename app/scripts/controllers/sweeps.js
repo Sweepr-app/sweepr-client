@@ -1,5 +1,7 @@
 'use strict';
 
+/*global angular*/
+
 /**
  * @ngdoc function
  * @name sweeprClientApp.controller:AboutCtrl

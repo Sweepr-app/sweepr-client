@@ -1,81 +1,141 @@
-$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
-// bower:scss
-@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
-// endbower
+@import "neat/neat";
+@import "bourbon/bourbon";
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i');
 
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+.top-nav {
+  padding: 15px;
+  padding-top: 20px;
+  display: flex;
+  align-items: flex-end;
+  
+  a {
+    flex-grow: 1;
+  }
+}
+
+.center-neat {
+  @include outer-container;
+  
+  form, h1 {
+    @include span-columns(10);
+    @include shift(1);
+    
+    input {
+      width: 100%;
+      padding: 12px 20px;
+      margin-top: 6px;
+      margin-bottom: 20px;    
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 28px;
+    }
+  }
+}
+
+.center-landing {
+  position: absolute; 
+  top: 25%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-btn {
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  -webkit-box-shadow: 0px 1px 3px #666666;
+  -moz-box-shadow: 0px 1px 3px #666666;
+  box-shadow: 0px 1px 3px #666666;
+  border-style: none;
+  color: #ffffff;
+  font-size: 20px;
+  background: #0074D9;
+  padding: 15px 110px 15px 110px;
+  text-decoration: none;
+  font-size: 32px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.login-btn:hover {
+  background: #3cb0fd;
+  text-decoration: none;
+}
+
+.module {
+
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.6)
+    ),
+    url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/skyscrapers.jpg);
+  background-size: cover;
+  width: 100%;
+  height: 200px;
+  margin: 0px 0px 5px 0px;
+  position: relative;
+  float: left;
+}
+
+.top h2 {
+  color: white;
+  margin: 0;
+  padding: 20px;
+}
+
+.accordion-tabs {
+  $large-screen: 20em !default;
+
+  @include clearfix;
+  
+  .tab-header-and-content {
+    list-style: none;
+    background-color: black;
+    padding: 5px;
+    @include media($large-screen) {
+      display: inline;
+    }
+  }
+
+  .tab-link {
+    display: block;
+    padding-right: 1em;
+    color: white;
+    background-color: black;
+    text-decoration: none;
+
+    @include media($large-screen) {
+      display: inline-block;
+    }
+  }
+
+  .is-active {
+    color: white;
+    font-weight: 600;
+  }
+
+  .tab-content {
+    display: none;
+    width: 100%;
+
+    @include media($large-screen) {
+      float: left;
+    }
+  }
+}
+
+section {
+  header { @include span-columns(3); }
+  section { @include span-columns(9); }
+}
+
+ul {
+  -webkit-padding-start: 0px;
 }
 
 body {
-  padding: 0;
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  margin-bottom: 10px;
-
-  /* Make the masthead heading the same height as the navigation */
-  h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-  }
-}
-
-/* Custom page footer */
-.footer {
-  padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-  margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
-
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
-}
-
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-  .container {
-    max-width: 730px;
-  }
-
-  /* Remove the padding we set earlier */
-  .header,
-  .footer {
-    padding-left: 0;
-    padding-right: 0;
-  }
-  /* Space out the masthead */
-  .header {
-    margin-bottom: 30px;
-  }
-  /* Remove the bottom border on the jumbotron for visual effect */
-  .jumbotron {
-    border-bottom: 0;
-  }
+  margin: 0;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
 }

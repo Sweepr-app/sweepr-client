@@ -36,7 +36,7 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/auth', {
         templateUrl: 'auth/auth.html',
         controller: 'AuthCtrl',
         controllerAs: 'auth'
@@ -46,7 +46,7 @@ angular
         controller: 'SweepsCtrl',
         controllerAs: 'sweeps'
       })
-      .when('/landing', {
+      .when('/', {
         templateUrl: 'views/landing.html',
         controller: 'LandingCtrl',
         controllerAs: 'landing'

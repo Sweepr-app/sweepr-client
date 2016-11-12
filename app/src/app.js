@@ -20,12 +20,12 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl',
-        controllerAs: 'main'
+        templateUrl: 'src/auth/auth.html',
+        controller: 'AuthCtrl',
+        controllerAs: 'auth'
       })
       .when('/sweeps', {
-        templateUrl: 'views/sweeps.html',
+        templateUrl: 'src/sweeps/sweeps.html',
         controller: 'SweepsCtrl',
         controllerAs: 'sweeps'
       })

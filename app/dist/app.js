@@ -23,15 +23,15 @@ angular.module("auth/login.html", []).run(["$templateCache", function($templateC
     "<div class=\"center-neat\">\n" +
     "    <form>\n" +
     "        <label><b>Username</b></label>\n" +
-    "        <input type=\"text\" placeholder=\"Enter Username\" name=\"username\" required>\n" +
+    "        <input type=\"text\" placeholder=\"Enter Username\" name=\"username\" ng-model='data.username' required>\n" +
     "        \n" +
     "        <label><b>Password</b></label>\n" +
-    "        <input type=\"password\" placeholder=\"Enter Password\" name=\"password\" required>\n" +
+    "        <input type=\"password\" placeholder=\"Enter Password\" name=\"password\" ng-model='data.password'required>\n" +
     "    </form>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"center-landing\" style=\"top: 90%;\">\n" +
-    "  <button class=\"login-btn\">Login</button>\n" +
+    "  <button class=\"login-btn\" ng-click='login.login(data.username, data.password)'>Login</button>\n" +
     "</div>");
 }]);
 
@@ -130,7 +130,8 @@ angular
       })
       .state('login', {
         url: '/login',
-        controller: 'AuthCtrl',
+        controller: 'LoginCtrl',
+        controllerAs: 'login',
         templateUrl: 'auth/login.html'
       })
       .state('signup', {
@@ -152,7 +153,7 @@ angular
     localStorageServiceProvider
       .setPrefix('sweeprApp');
   })
-  .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
+  .run(['$rootScope', '$state', '$stateParams', 'AuthService', function ($rootScope, $state, $stateParams, AuthService) {
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
       if (typeof toState === 'undefined') {
@@ -162,7 +163,13 @@ angular
       if (toState.name !== 'home' && 
           toState.name !== 'login' &&
           toState.name !== 'signup') {
-        console.log("Attempting to go to open state.")
+        console.log("Attempting to go to non-public state.")
+
+        if (!AuthService.hasToken()) {
+          event.preventDefault();
+          $state.go('login');
+        }
+
         return;
       }
 
@@ -171,13 +178,80 @@ angular
 
   }])
 angular.module('sweeprClientApp')
+  .factory('auth', ['$resource', function ($resource) {
+    return $resource('http://127.0.0.1:8080/auth', 
+      {},
+      {
+        login: {
+          method: 'POST',
+          url: 'http://127.0.0.1:9912/auth'
+        }
+      })
+  }])
+angular.module('sweeprClientApp')
   .controller('AuthCtrl', [function () {
     
   }])
 angular.module('sweeprClientApp')
-  .factory('AuthService', [ 'localStorageService', function (localStorageService) {
+  .controller('LoginCtrl', [ '$state', 'AuthService', function ($state, AuthService) {
 
-    return {};
+    this.data = {}
+    
+    this.login = function (username, password) {
+      console.log(username, password); 
+      AuthService.loginUser(username, password).then(function () {
+        $state.go('sweeps')
+      })
+    }
+
+  }])
+angular.module('sweeprClientApp')
+  .factory('AuthService', [ 'auth', 'localStorageService', function (auth, localStorageService) {
+
+    var AuthService = {
+      loginUser: loginUser,
+      hasToken: hasToken,
+      getToken: getToken,
+    };
+
+    var token = null,
+        user  = null;
+
+    function loginUser (email, password) {
+      return auth.login({
+        email: email,
+        password: password
+      }, function (res) {
+        console.log(res)
+        token = res.token;
+        user = res.user;
+        storeUserInfo(res);
+      }, function () {
+        console.error("Login Failed")
+      }).$promise;
+    }
+
+    function hasToken () {
+      console.log(token !== null)
+      return token !== null;
+    }
+
+    function storeUserInfo (res) {
+      localStorageService.set('auth_token', res.token)
+      localStorageService.set('user_info', res.user)
+    }
+
+    function getToken () {
+      var storedToken = localStorageService.get('auth_token')
+      token = storedToken;
+
+      var storedUser = localStorageService.get('user_info')
+      user = storedUser;
+    }
+
+    getToken();
+
+    return AuthService;
   }])
 angular.module('sweeprClientApp')
   .controller('SweepsCtrl', [function () {

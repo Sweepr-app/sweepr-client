@@ -32,7 +32,8 @@ angular
       })
       .state('login', {
         url: '/login',
-        controller: 'AuthCtrl',
+        controller: 'LoginCtrl',
+        controllerAs: 'login',
         templateUrl: 'auth/login.html'
       })
       .state('signup', {
@@ -54,7 +55,7 @@ angular
     localStorageServiceProvider
       .setPrefix('sweeprApp');
   })
-  .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
+  .run(['$rootScope', '$state', '$stateParams', 'AuthService', function ($rootScope, $state, $stateParams, AuthService) {
 
     $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
       if (typeof toState === 'undefined') {
@@ -64,7 +65,13 @@ angular
       if (toState.name !== 'home' && 
           toState.name !== 'login' &&
           toState.name !== 'signup') {
-        console.log("Attempting to go to open state.")
+        console.log("Attempting to go to non-public state.")
+
+        if (!AuthService.hasToken()) {
+          event.preventDefault();
+          $state.go('login');
+        }
+
         return;
       }
 

@@ -14,13 +14,13 @@
 <div class="center-neat">
     <form>
         <label><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="username" required>
+        <input type="text" placeholder="Enter Username" name="username" ng-model='data.username' required>
         
         <label><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" required>
+        <input type="password" placeholder="Enter Password" name="password" ng-model='data.password'required>
     </form>
 </div>
 
 <div class="center-landing" style="top: 90%;">
-  <button class="login-btn">Login</button>
+  <button class="login-btn" ng-click='login.login(data.username, data.password)'>Login</button>
 </div>

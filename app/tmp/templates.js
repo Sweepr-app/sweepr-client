@@ -23,15 +23,15 @@ angular.module("auth/login.html", []).run(["$templateCache", function($templateC
     "<div class=\"center-neat\">\n" +
     "    <form>\n" +
     "        <label><b>Username</b></label>\n" +
-    "        <input type=\"text\" placeholder=\"Enter Username\" name=\"username\" required>\n" +
+    "        <input type=\"text\" placeholder=\"Enter Username\" name=\"username\" ng-model='data.username' required>\n" +
     "        \n" +
     "        <label><b>Password</b></label>\n" +
-    "        <input type=\"password\" placeholder=\"Enter Password\" name=\"password\" required>\n" +
+    "        <input type=\"password\" placeholder=\"Enter Password\" name=\"password\" ng-model='data.password'required>\n" +
     "    </form>\n" +
     "</div>\n" +
     "\n" +
     "<div class=\"center-landing\" style=\"top: 90%;\">\n" +
-    "  <button class=\"login-btn\">Login</button>\n" +
+    "  <button class=\"login-btn\" ng-click='login.login(data.username, data.password)'>Login</button>\n" +
     "</div>");
 }]);
 

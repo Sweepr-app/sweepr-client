@@ -1,4 +1,4 @@
-angular.module('pbxxr1App.templates', ['auth/auth.html', 'sweeps/sweeps.html']);
+angular.module('sweeprClientApp.templates', ['auth/auth.html', 'sweeps/sweeps.html']);
 
 angular.module("auth/auth.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("auth/auth.html",
@@ -27,17 +27,18 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
+    'sweeprClientApp.templates',
     'ngTouch'
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'src/auth/auth.html',
+        templateUrl: 'auth/auth.html',
         controller: 'AuthCtrl',
         controllerAs: 'auth'
       })
       .when('/sweeps', {
-        templateUrl: 'src/sweeps/sweeps.html',
+        templateUrl: 'sweeps/sweeps.html',
         controller: 'SweepsCtrl',
         controllerAs: 'sweeps'
       })

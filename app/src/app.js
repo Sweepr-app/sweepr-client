@@ -15,17 +15,18 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
+    'sweeprClientApp.templates',
     'ngTouch'
   ])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'src/auth/auth.html',
+        templateUrl: 'auth/auth.html',
         controller: 'AuthCtrl',
         controllerAs: 'auth'
       })
       .when('/sweeps', {
-        templateUrl: 'src/sweeps/sweeps.html',
+        templateUrl: 'sweeps/sweeps.html',
         controller: 'SweepsCtrl',
         controllerAs: 'sweeps'
       })

@@ -119,8 +119,11 @@ module.exports = function (grunt) {
       },
       dist: {
         options: {
-          open: true,
-          base: '<%= yeoman.dist %>'
+          hostname: '0.0.0.0',
+          port: 9000,
+          base: 'dist',
+          keepalive: true,
+          livereload: false
         }
       }
     },
@@ -246,7 +249,7 @@ module.exports = function (grunt) {
     html2js: {
       options: {
         base: 'app/src',
-        module: 'pbxxr1App.templates'
+        module: 'sweeprClientApp.templates'
       },
       dist: {
         src: ['app/src/**/*.html'],

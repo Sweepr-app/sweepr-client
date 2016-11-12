@@ -16,7 +16,7 @@
 .center-neat {
   @include outer-container;
   
-  form, h1 {
+  form, h1, button {
     @include span-columns(10);
     @include shift(1);
     
@@ -49,12 +49,12 @@
   box-shadow: 0px 1px 3px #666666;
   border-style: none;
   color: #ffffff;
-  font-size: 20px;
   background: #0074D9;
   padding: 15px 110px 15px 110px;
   text-decoration: none;
   font-size: 32px;
   font-family: 'Josefin Sans', sans-serif;
+  // margin-left: 0px !important;
 }
 
 .login-btn:hover {
